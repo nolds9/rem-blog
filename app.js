@@ -1,60 +1,54 @@
-// Load Dependencies
 var express = require('express');
-var swig = require('swig');
+var swig = require ('swig');
 var path = require('path');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-//  Require Routes
+// I'M NEW - define our routes
 var index = require('./routes/index');
-var api = require('./routes/api');
-var admin = require('./routes/admin');
-var posts = require('./routes/posts');
-var projects = require('./routes/projects');
+// var api = require('./routes/api');
+// var admin = require('./routes/admin');
+// var posts = require('./routes/posts');
+// var projects = require('./routes/projects');
 
-// Initialize App
 var app = express();
 
-// Which Port to Listen to Depending on Environment
+// I'M NEW - declaring the port from environment (as in the case of Heroku) or doing it manually otherwise
 app.set('port', (process.env.PORT || 8080));
 
-// Intialize and load View Template Swig
+// I'M NEW - view engine setup
 var swig = new swig.Swig();
 app.set('views', path.join(__dirname, 'views'));
 app.engine('html', swig.renderFile);
 app.set('view engine', 'html');
 
-// Require Server MiddleWare and declare static directory
-
-// app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+// uncomment after placing your favicon in /public
+//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false }));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Initial Routes
+// I'M NEW - initialize our routes
 app.use('/', index);
-app.use('/api', api);
-app.use('/admin', admin);
-app.use('/posts', posts);
-app.use('/projects', projects);
+// // app.use('/api', api);
+// app.use('/admin', admin);
+// app.use('/posts', posts);
+// app.use('/projects', projects);
 
-// Catch 404 and forward to error handler
-app.use(function(req,res,next) {
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
 
-//////////////////
-// Error Handlers
-\\\\\\\\\\\\\\\\\\
+// error handlers
 
-// Development error handler
-// Will print statcktrace
-
+// development error handler
+// will print stacktrace
 if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
     res.status(err.status || 500);
@@ -65,7 +59,8 @@ if (app.get('env') === 'development') {
   });
 }
 
-// Production Error Handler
+// production error handler
+// no stacktraces leaked to user
 app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error', {
@@ -74,8 +69,8 @@ app.use(function(err, req, res, next) {
   });
 });
 
-app.listen(app.get('port'), function(){
-  console.log('Listening to', app.get('port'));
+app.listen(app.get('port'), function() {
+    console.log('Listening to', app.get('port'));
 });
 
 module.exports = app;
