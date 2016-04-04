@@ -1,8 +1,7 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
+@import 'reset.css';
 
-a {
-  color: #00B7FF;
+html body {
+    background: #fbfbfb;
+    color: rgba(0,0,0,.8);
+    font-family:  20px 'Open Sans', Helvetica, Arial, sans-serif;
 }
