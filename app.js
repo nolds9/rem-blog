@@ -5,7 +5,6 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-// I'M NEW - define our routes
 var index = require('./routes/index');
 // var api = require('./routes/api');
 // var admin = require('./routes/admin');
@@ -14,10 +13,10 @@ var index = require('./routes/index');
 
 var app = express();
 
-// I'M NEW - declaring the port from environment (as in the case of Heroku) or doing it manually otherwise
+// declaring the port from environment (as in the case of Heroku) or doing it manually otherwise
 app.set('port', (process.env.PORT || 8080));
 
-// I'M NEW - view engine setup
+// view engine setup
 var swig = new swig.Swig();
 app.set('views', path.join(__dirname, 'views'));
 app.engine('html', swig.renderFile);
@@ -31,7 +30,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// I'M NEW - initialize our routes
+// initialize our routes
 app.use('/', index);
 // // app.use('/api', api);
 // app.use('/admin', admin);

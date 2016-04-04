@@ -9,7 +9,7 @@ var Header = React.createClass({
 
         return (
             React.createElement('div', {},
-                'Greetings Human, I am web browser render logic.  Count your days!'
+                'Jello World! I am web browser render logic.  Count your days!'
             )
         )
 
